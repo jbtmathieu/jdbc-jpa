@@ -31,29 +31,32 @@ public class App {
             System.out.println("Entrez le nom de la table :");
             response = sc.nextLine();
             //response = "contact";
-            ResultSet resultSet = st.executeQuery("SELECT * FROM "+ response);
-            ResultSetMetaData rsMetadata = resultSet.getMetaData();
-            int count = rsMetadata.getColumnCount();
-            if (count > 0) {
-                System.out.println("Voici les information de la table " + response);
-                for (int i = 1; i <= count; ++i) {
-                    System.out.printf("%-15s", rsMetadata.getColumnName(i) + "[" + rsMetadata.getColumnTypeName(i) + "]"); // au minimum 25 caractères - printf = formaté
-                }
+            if (!response.equalsIgnoreCase("exit")) {
 
-                System.out.println();
-                System.out.println("############################");
-                while (resultSet.next()) {
+                ResultSet resultSet = st.executeQuery("SELECT * FROM " + response);
+                ResultSetMetaData rsMetadata = resultSet.getMetaData();
+                int count = rsMetadata.getColumnCount();
+                if (count > 0) {
+                    System.out.println("Voici les information de la table " + response);
                     for (int i = 1; i <= count; ++i) {
-                        System.out.printf("%-20s", resultSet.getString(i));
+                        System.out.printf("%-15s", rsMetadata.getColumnName(i) + "[" + rsMetadata.getColumnTypeName(i) + "]"); // au minimum 25 caractères - printf = formaté
                     }
+
                     System.out.println();
+                    System.out.println("######################################################################################");
+                    while (resultSet.next()) {
+                        for (int i = 1; i <= count; ++i) {
+                            System.out.printf("%-20s", resultSet.getString(i));
+                        }
+                        System.out.println();
+                    }
                 }
-
+                resultSet.close();
             }
-
-
-
         } while (!response.equalsIgnoreCase("exit"));
+
+        st.close();
+        rs.close();
 
 
         connection.close();
