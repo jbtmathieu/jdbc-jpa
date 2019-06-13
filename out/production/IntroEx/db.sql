@@ -1,0 +1,23 @@
+DROP TABLE IF EXISTS `contact`;
+DROP TABLE IF EXISTS `address`;
+CREATE TABLE `address` (
+	`id` BIGINT(20) NOT NULL AUTO_INCREMENT,
+	`details` VARCHAR(255) NULL DEFAULT NULL,
+	PRIMARY KEY (`id`)
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB;
+
+
+CREATE TABLE `contact` (
+	`id` BIGINT(20) NOT NULL AUTO_INCREMENT,
+	`email` VARCHAR(255) NULL DEFAULT NULL,
+	`first_name` VARCHAR(255) NULL DEFAULT NULL,
+	`last_name` VARCHAR(255) NULL DEFAULT NULL,
+	`address_id` BIGINT(20) NULL DEFAULT NULL,
+	PRIMARY KEY (`id`),
+	CONSTRAINT `FK_address` FOREIGN KEY (`address_id`) REFERENCES `address` (`id`),
+	UNIQUE INDEX `UK_email` (`email`)
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB;
