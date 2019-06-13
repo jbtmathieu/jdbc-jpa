@@ -17,8 +17,11 @@ public class PersistenceManager {
     private static Connection connection;
 
 
+
+
     //constr
     private PersistenceManager(){
+
 
     }
     //set get

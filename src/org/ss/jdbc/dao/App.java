@@ -7,7 +7,7 @@ import java.sql.*;
 public class App {
 
     public static void main(String[] args) {
-/*
+/* first App
         String url = "jdbc:mysql://localhost:3306/digi-jdbc?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC";
         String login = "root";
         String pwd = "";
@@ -44,7 +44,7 @@ public class App {
 
         */
 
-
+// 2nd
         try (Connection cnx = PersistenceManager.getConnection(); // persistenceM
              Statement st = cnx.createStatement();
              ResultSet rs = st.executeQuery("SELECT * FROM contact")) {
